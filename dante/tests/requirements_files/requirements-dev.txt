@@ -1,0 +1,4 @@
+-r requirements.txt
+-c constraints-dev.txt
+
+pytest

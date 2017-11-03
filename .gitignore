@@ -1,0 +1,10 @@
+.idea/
+.DS_Store
+.cache
+build/
+dante.egg-info/
+dist/
+__pycache__
+
+.tox
+.coverage
