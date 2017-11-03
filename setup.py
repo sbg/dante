@@ -1,6 +1,14 @@
+import io
+import os
 from setuptools import setup, find_packages
 
-version = '1.0'
+
+version = '1.0.0'
+
+VERSION_FILE = 'VERSION'
+if os.path.isfile(VERSION_FILE):
+    with io.open(VERSION_FILE, 'r', encoding='utf-8') as f:
+        version = f.read()
 
 install_requires = [
     'pip>=9.0.1, <10',
