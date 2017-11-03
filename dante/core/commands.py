@@ -191,6 +191,11 @@ def check_conflicts(tree):
     :param tree: dictionary of dependencies
     :return: None
     """
+    # Argparse inserts namespace as an argument, this will check if
+    # the tree was passed as a dict, and if not, create it
+    if not isinstance(tree, dict):
+        tree = get_package_tree()
+
     conflicting_data = get_conflicting_dependencies(tree=tree)
     cyclic_data = get_cyclic_dependencies(tree=tree)
 
