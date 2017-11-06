@@ -3,6 +3,14 @@
 Release History
 ---------------
 
+1.0.6 (2017-11-06)
+++++++++++++++++++
+
+**Documentation**
+
+- Add links to PyPi and license to readme
+
+
 1.0.5 (2017-11-06)
 ++++++++++++++++++
 
