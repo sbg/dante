@@ -25,7 +25,7 @@ if os.path.isfile(CHANGELOG_FILE):
         changelog = f.read()
 
 
-long_description = '{}\n{}'.format(long_description, changelog)
+long_description = '{}\n\n{}'.format(long_description, changelog)
 
 install_requires = [
     'pip>=9.0.1, <10',
