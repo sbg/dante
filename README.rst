@@ -1,12 +1,7 @@
 Dante
 =====
 
-|PyPi| |License|
-
-.. |PyPi| image:: https://badge.fury.io/py/dante.svg
-:target: https://badge.fury.io/py/dante
-.. |License| image:: https://img.shields.io/badge/License-Apache%202.0-blue.svg
-:target: https://github.com/sbg/dante/blob/master/LICENSE
+|PypI| |License|
 
 Dante is a helper library for managing python dependencies.
 
@@ -311,3 +306,10 @@ Dante roadmap
 -  In upgrades, list only top level or secondary requirements depending
    on input args
 -  Code analysis to find used libraries
+
+
+.. |PyPi| image:: https://badge.fury.io/py/dante.svg
+:target: https://badge.fury.io/py/dante
+
+.. |License| image:: https://img.shields.io/badge/License-Apache%202.0-blue.svg
+:target: https://github.com/sbg/dante/blob/master/LICENSE
