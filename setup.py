@@ -18,6 +18,15 @@ if os.path.isfile(README_FILE):
         long_description = f.read()
 
 
+changelog = ''
+CHANGELOG_FILE = 'HISTORY.rst'
+if os.path.isfile(CHANGELOG_FILE):
+    with io.open(CHANGELOG_FILE, 'r', encoding='utf-8') as f:
+        changelog = f.read()
+
+
+long_description = '{}\n{}'.format(long_description, changelog)
+
 install_requires = [
     'pip>=9.0.1, <10',
     'pipdeptree>=0.10.1, <0.11',

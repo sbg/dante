@@ -3,6 +3,14 @@
 Release History
 ---------------
 
+1.0.4 (2017-11-06)
+++++++++++++++++++
+
+**Documentation**
+
+- Replace history link in readme with file contents
+
+
 1.0.3 (2017-11-06)
 ++++++++++++++++++
 
