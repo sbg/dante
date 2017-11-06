@@ -309,7 +309,7 @@ Dante roadmap
 
 
 .. |PyPi| image:: https://badge.fury.io/py/dante.svg
-:target: https://badge.fury.io/py/dante
+    :target: https://badge.fury.io/py/dante
 
 .. |License| image:: https://img.shields.io/badge/License-Apache%202.0-blue.svg
-:target: https://github.com/sbg/dante/blob/master/LICENSE
+    :target: https://github.com/sbg/dante/blob/master/LICENSE
