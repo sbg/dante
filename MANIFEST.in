@@ -1,0 +1,7 @@
+include *.rst
+include *.txt
+include tox.ini
+include LICENSE
+include VERSION
+include setup.cfg
+include .coveragerc

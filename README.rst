@@ -3,6 +3,13 @@ Dante
 
 Dante is a helper library for managing python dependencies.
 
+
+Changelog
+=========
+
+See `HISTORY <HISTORY.rst>`_.
+
+
 Why use Dante?
 ==============
 
