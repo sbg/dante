@@ -1,9 +1,9 @@
 Dante
 =====
 
-|PypI| |License|
+|PypI||License|
 
-Dante is a helper library for managing python dependencies.
+Dante is a utility library for managing python dependencies.
 
 Why use Dante?
 ==============

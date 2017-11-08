@@ -1,4 +1,4 @@
-"""Python dependency management helper"""
+"""Python dependency management utility"""
 import os
 import io
 import json

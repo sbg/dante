@@ -16,7 +16,7 @@ def get_parser():
     :return: argument parser object
     """
     parser = argparse.ArgumentParser(
-        description='Python dependency management helper'
+        description='Python dependency management utility'
     )
     parser.add_argument(
         '-i',

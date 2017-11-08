@@ -11,7 +11,7 @@ if os.path.isfile(VERSION_FILE):
         version = f.read()
 
 
-description = long_description = 'Python dependency management helper'
+description = long_description = 'Python dependency management utility'
 README_FILE = 'README.rst'
 if os.path.isfile(README_FILE):
     with io.open(README_FILE, 'r', encoding='utf-8') as f:
