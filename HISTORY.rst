@@ -3,6 +3,14 @@
 Release History
 ---------------
 
+1.0.9 (2017-11-14)
+++++++++++++++++++
+
+**Improvements**
+
+- Show all constraints that were not set to an exact version
+
+
 1.0.8 (2017-11-08)
 ++++++++++++++++++
 

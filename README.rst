@@ -57,9 +57,8 @@ Dante’s own libraries can’t be excluded because some of them might be
 used by your project) \* If some requirements are not pinned to a
 specific version \* Constraints that are not set (packages required by
 packages in requirements that do not have a set version inside those
-packages). \* Constraints that are restricted without a maximum allowed
-version (not set to less than a version or not set to equal to a
-specific version)
+packages). \* Constraints that are restricted with a minimal allowed
+version only (not set as equal to a specific version)
 
 Constraints serve to limit the requirements of the specified
 requirements. They should also be split into two files (constraints.txt

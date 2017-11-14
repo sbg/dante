@@ -502,16 +502,23 @@ def get_unset_constraints(required_packages, constrained_packages,
     unset_constraints = []
     for package in secondary_packages:
 
+        # check if package is already limited in requirements
         if package.key in required_packages:
             continue
 
-        if (package.key not in
-                [key.lower() for key in constrained_packages.keys()]):
-            specified_version = get_required_package_version(package)
-            if (specified_version is VERSION_ANY or
-                    '>' in specified_version and
-                    '<' not in specified_version):
-                unset_constraints.append(package)
+        # check if package is already limited in parent
+        specified_version = get_required_package_version(package)
+        if specified_version != VERSION_ANY and '==' in specified_version:
+            continue
+
+        # check if package is already limited in project
+        set_version = constrained_packages.get(package.key, None)
+        if set_version is not None and '==' in str(set_version):
+            continue
+
+        # if constraint is not limited add the package to the list
+        unset_constraints.append(package)
+
     return unset_constraints
 
 
@@ -523,7 +530,7 @@ def get_constraints_not_limited(constrained_packages):
     return [
         package for package in constrained_packages
         if constrained_packages[package] is None or
-        str(constrained_packages[package]).startswith('>')
+        '==' not in str(constrained_packages[package])
     ]
 
 
@@ -575,7 +582,7 @@ def get_requirements_packages(requirements_files):
         req_packages.update(
             parse_requirement_file(req_file=req_file)
         )
-    return req_packages
+    return {k.lower(): v for k, v in req_packages.items()}
 
 
 def get_constraints_packages(constraints_files):
@@ -588,7 +595,7 @@ def get_constraints_packages(constraints_files):
         con_packages.update(
             parse_requirement_file(
                 req_file=con_file, constraint=True))
-    return con_packages
+    return {k.lower(): v for k, v in con_packages.items()}
 
 
 def check(args):
