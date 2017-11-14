@@ -3,6 +3,14 @@
 Release History
 ---------------
 
+1.0.10 (2017-11-14)
++++++++++++++++++++
+
+**Bugfixes**
+
+- Handle possible nonexistent requirement files and missing packages
+
+
 1.0.9 (2017-11-14)
 ++++++++++++++++++
 

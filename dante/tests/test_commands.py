@@ -291,7 +291,7 @@ def test_get_missing_requirements():
     assert 'faker' in [package.key for package in missing_requirements]
 
 
-def test_get_unpinned_requirements():
+def test_get_invalid_requirements():
     # preconditions
     include_only = ['py', 'pip', 'pytest']
     tree = commands.get_package_tree(include_only=include_only)
@@ -299,20 +299,26 @@ def test_get_unpinned_requirements():
     required_packages = {
         'py': {},
         'pip': {},
-        'pytest': None
+        'pytest': None,
+        'some_package': None
     }
 
     # action
-    unpinned_requirements = commands.get_unpinned_requirements(
-        tree, required_packages)
+    unpinned_requirements, missing_requirements = (
+        commands.get_invalid_requirements(tree, required_packages))
 
     # verification
     unpinned_keys = [
         package['package_name'] for package in unpinned_requirements]
 
+    missing_keys = [
+        package['package_name'] for package in missing_requirements]
+
     assert 'pytest' in unpinned_keys
     assert 'py' not in unpinned_keys
     assert 'pip' not in unpinned_keys
+
+    assert 'some_package' in missing_keys
 
 
 def test_get_unset_constraints():

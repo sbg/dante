@@ -1,6 +1,7 @@
 """Python dependency management utility"""
 import os
 import io
+import sys
 import json
 import tempfile
 import contextlib
@@ -382,6 +383,10 @@ def parse_requirement_file(req_file, constraint=False):
     :param constraint: if file a constraints file
     :return: dictionary of dependencies
     """
+    if not os.path.exists(req_file):
+        printer.warning('Requirement file "{}" not found'.format(req_file))
+        sys.exit()
+
     with open(req_file, 'r') as requirements_file:
         with tempfile.NamedTemporaryFile('r+', delete=False) as temp_file:
 
@@ -447,13 +452,14 @@ def check_requirements_missing(required_packages, main_packages):
         printer.success('All packages in requirements.')
 
 
-def get_unpinned_requirements(tree, required_packages):
-    """Returns requirements that are not pinned
+def get_invalid_requirements(tree, required_packages):
+    """Returns requirements that are not pinned or are not installed
     :param tree: dictionary of dependencies
     :param required_packages: required packages
     :return: list of unpinned requirements
     """
     unpinned_requirements = []
+    missing_requirements = []
     for required_package in required_packages:
 
         package = next((
@@ -461,24 +467,34 @@ def get_unpinned_requirements(tree, required_packages):
             if item.key == required_package.lower()
         ), None)
 
+        if package is None:
+            missing_requirements.append({
+                'package_name': required_package.lower()})
+            continue
+
         if required_packages[required_package] is None:
             unpinned_requirements.append({
                 'package_name': package.key,
                 'package_version': get_installed_package_version(package)
             })
-    return unpinned_requirements
+    return unpinned_requirements, missing_requirements
 
 
 def check_requirements_not_pinned(tree, required_packages):
-    """Print if all requirements are pinned
+    """Print if all requirements are pinned and present
     :param required_packages: required packages
     :param tree: dictionary of dependencies
     :return: None
     """
-    unpinned_requirements = get_unpinned_requirements(
+    unpinned_requirements, missing_requirements = get_invalid_requirements(
         tree=tree,
         required_packages=required_packages
     )
+
+    if missing_requirements:
+        printer.warning('WARNING - Requirements not installed:')
+        for requirement in missing_requirements:
+            printer.package(package_name=requirement['package_name'])
 
     if unpinned_requirements:
         printer.warning('WARNING - Requirements not pinned:')
@@ -487,8 +503,9 @@ def check_requirements_not_pinned(tree, required_packages):
                 package_name=requirement['package_name'],
                 package_version=requirement['package_version']
             )
-    else:
-        printer.success('All set requirements pinned.')
+
+    if not missing_requirements and not unpinned_requirements:
+        printer.success('All set requirements installed and pinned.')
 
 
 def get_unset_constraints(required_packages, constrained_packages,
