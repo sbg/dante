@@ -615,6 +615,34 @@ def get_constraints_packages(constraints_files):
     return {k.lower(): v for k, v in con_packages.items()}
 
 
+def get_duplicates(required_packages, constrained_packages):
+    return [
+        package
+        for package in required_packages
+        if package in constrained_packages
+    ]
+
+
+def check_for_duplicates(required_packages, constrained_packages):
+    duplicates = get_duplicates(
+        required_packages=required_packages,
+        constrained_packages=constrained_packages
+    )
+    if duplicates:
+        printer.warning('WARNING - Duplicate packages detected')
+        tabular_data = [
+            [
+                printer.printable_package(package),
+                required_packages[package],
+                constrained_packages[package]
+            ] for package in duplicates
+        ]
+        headers = [
+            'Package', 'Required version', 'Constrained version'
+        ]
+        printer.table(tabular_data=tabular_data, headers=headers)
+
+
 def check(args):
     """Checks requirement and constraint files for possible errors
     :param args: Command line args
@@ -636,6 +664,11 @@ def check(args):
 
     # Checks
     check_conflicts(tree=tree)
+
+    check_for_duplicates(
+        required_packages=required_packages,
+        constrained_packages=constrained_packages
+    )
 
     check_requirements_missing(
         required_packages=required_packages, main_packages=main_packages)

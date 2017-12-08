@@ -213,9 +213,9 @@ Check files
 
 Check requirement and constraint files for possible errors (multiple
 files can be included for both requirements and constraints). This
-command checks for missing and unpinned requirements and suggested
-constraints for secondary dependencies that are not constrained by
-packages that use them.
+command checks for conflicts, cyclical dependencies, duplicates,
+missing and unpinned requirements and suggested constraints for secondary
+dependencies that are not constrained by packages that use them.
 
 ::
 
@@ -235,6 +235,11 @@ Example:
     sbg-common         six           ==1.9.0     1.10.0
     sbg-openid-client  cryptography  ==1.5.2     1.8.1
     No cyclic dependencies detected.
+    WARNING - Duplicate packages detected
+    Package            Required version  Constrained version
+    -----------------  ----------------  -------------------
+    sbg-common          ==1.0.1           ==0.0.7
+    sbg-openid-client   ==1.0.7           ==0.0.12
     WARNING - Possibly missing requirements:
     coverage==4.3.4
     django-encrypted-cookie-session==3.2.0

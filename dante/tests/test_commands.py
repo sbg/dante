@@ -170,6 +170,27 @@ def test_get_cyclic_dependencies():
     assert cyclic_dependencies is None
 
 
+def test_get_duplicates():
+    # preconditions
+    required_packages = {
+        'py': None,
+        'pip': None
+    }
+    constrained_packages = {
+        'py': None,
+        'pytest': None
+    }
+
+    # action
+    duplicates = commands.get_duplicates(
+        required_packages, constrained_packages)
+
+    # verification
+    assert 'py' in duplicates
+    assert 'pip' not in duplicates
+    assert 'pytest' not in duplicates
+
+
 def test_get_package_dependencies():
     # preconditions
     include_only = ['pytest']
