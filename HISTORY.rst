@@ -2,6 +2,22 @@
 
 Release History
 ---------------
+1.0.12 (2017-12-22)
++++++++++++++++++++
+
+**Improvements**
+
+- Add version command
+- Small check optimization
+
+
+1.0.11 (2017-12-08)
++++++++++++++++++++
+
+**Improvements**
+
+- Add check for duplicates in requirements and constraints files
+
 
 1.0.10 (2017-11-14)
 +++++++++++++++++++
