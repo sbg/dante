@@ -616,6 +616,11 @@ def get_constraints_packages(constraints_files):
 
 
 def get_duplicates(required_packages, constrained_packages):
+    """Returns duplicate packages from requirements and constraints
+    :param required_packages: required packages
+    :param constrained_packages: constrained packages
+    :return: duplicate list
+    """
     return [
         package
         for package in required_packages
@@ -624,6 +629,11 @@ def get_duplicates(required_packages, constrained_packages):
 
 
 def check_for_duplicates(required_packages, constrained_packages):
+    """Checks for duplicates in requirements and constraints
+    :param required_packages: required packages
+    :param constrained_packages: constrained packages
+    :return:
+    """
     duplicates = get_duplicates(
         required_packages=required_packages,
         constrained_packages=constrained_packages
