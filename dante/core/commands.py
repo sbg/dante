@@ -675,16 +675,20 @@ def check(args):
     # Checks
     check_conflicts(tree=tree)
 
-    check_for_duplicates(
-        required_packages=required_packages,
-        constrained_packages=constrained_packages
-    )
+    if required_packages and constrained_packages:
+        check_for_duplicates(
+            required_packages=required_packages,
+            constrained_packages=constrained_packages
+        )
 
     check_requirements_missing(
         required_packages=required_packages, main_packages=main_packages)
 
-    check_requirements_not_pinned(
-        tree=tree, required_packages=required_packages)
+    if required_packages:
+        check_requirements_not_pinned(
+            tree=tree,
+            required_packages=required_packages
+        )
 
     check_constraints_set_and_limited(
         required_packages=required_packages,
