@@ -235,12 +235,12 @@ Example:
     sbg-common         six           ==1.9.0     1.10.0
     sbg-openid-client  cryptography  ==1.5.2     1.8.1
     No cyclic dependencies detected.
-    WARNING - Duplicate packages detected
+    WARNING: Duplicate packages detected
     Package            Required version  Constrained version
     -----------------  ----------------  -------------------
     sbg-common          ==1.0.1           ==0.0.7
     sbg-openid-client   ==1.0.7           ==0.0.12
-    WARNING - Possibly missing requirements:
+    WARNING: Possibly missing requirements
     coverage==4.3.4
     django-encrypted-cookie-session==3.2.0
     django-user-agents==0.3.0
@@ -249,7 +249,7 @@ Example:
     gunicorn==19.7.0
     ...
     All requirements pinned.
-    WARNING - Constraints not set:
+    WARNING: Constraints not set
     Package            Required     Installed
     -----------------  -----------  -----------
     appdirs            >=1.4.0      1.4.3

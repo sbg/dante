@@ -443,7 +443,7 @@ def check_requirements_missing(required_packages, main_packages):
     )
 
     if requirements_missing:
-        printer.warning('WARNING - Possibly missing requirements:')
+        printer.warning('Possibly missing requirements')
         for requirement in requirements_missing:
             printer.package_versioned(
                 package_name=requirement.key,
@@ -492,12 +492,12 @@ def check_requirements_not_pinned(tree, required_packages):
     )
 
     if missing_requirements:
-        printer.warning('WARNING - Requirements not installed:')
+        printer.warning('Requirements not installed')
         for requirement in missing_requirements:
             printer.package(package_name=requirement['package_name'])
 
     if unpinned_requirements:
-        printer.warning('WARNING - Requirements not pinned:')
+        printer.warning('Requirements not pinned')
         for requirement in unpinned_requirements:
             printer.package_versioned(
                 package_name=requirement['package_name'],
@@ -572,7 +572,7 @@ def check_constraints_set_and_limited(required_packages, constrained_packages,
             get_installed_package_version(package)
         ] for package in unset_constraints]
         headers = ['Package', 'Required', 'Installed']
-        printer.warning('WARNING - Constraints not set:')
+        printer.warning('Constraints not set')
         printer.table(tabular_data=data, headers=headers)
     else:
         # check if all constraints are limited
@@ -582,7 +582,7 @@ def check_constraints_set_and_limited(required_packages, constrained_packages,
 
         printer.success('All constraints set.')
         if constraints_not_limited:
-            printer.warning('WARNING - Constraints not limited:')
+            printer.warning('Constraints not limited')
             for package_name in constraints_not_limited:
                 printer.package(package_name=package_name)
         else:
@@ -639,7 +639,7 @@ def check_for_duplicates(required_packages, constrained_packages):
         constrained_packages=constrained_packages
     )
     if duplicates:
-        printer.warning('WARNING - Duplicate packages detected')
+        printer.warning('Duplicate packages detected')
         tabular_data = [
             [
                 printer.printable_package(package),

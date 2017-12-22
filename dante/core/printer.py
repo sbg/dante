@@ -124,7 +124,8 @@ class Printer:
         """Print colored warning
         :param message: message string
         """
-        print(self._printable_warning(message))
+        warning_message = 'WARNING: {}'.format(message)
+        print(self._printable_warning(warning_message))
 
     def success(self, message):
         """Print colored success
