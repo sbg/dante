@@ -8,6 +8,7 @@ try:
 except ImportError:
     colorama = None
 
+import dante
 from dante.core import commands
 
 
@@ -18,6 +19,15 @@ def get_parser():
     parser = argparse.ArgumentParser(
         description='Python dependency management utility'
     )
+
+    # VERSION
+    parser.add_argument(
+        '-v',
+        '--version',
+        action='version',
+        version='dante {}'.format(dante.__version__)
+    )
+
     # IGNORE
     parser.add_argument(
         '-i',
