@@ -83,7 +83,7 @@ def test_warning(given, capsys):
     # preconditions
     printer = given.printer.exists()
     message = generator.slug()
-    expected_output = '{}{}{}'.format(
+    expected_output = '{}WARNING: {}{}'.format(
         printer.warning_color,
         message,
         printer.foreground_color
