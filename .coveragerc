@@ -1,5 +1,0 @@
-[run]
-include = dante/*
-omit =
-    dante/__main__.py
-    dante/tests/*

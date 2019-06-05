@@ -1,0 +1,7 @@
+# comment to ignore
+-c constraints_reference_to_ignore.txt
+-r requirements_reference_to_ignore.txt
+
+package1==1.0.0
+package2==1.0.0
+package3==1.0.0

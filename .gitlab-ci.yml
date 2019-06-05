@@ -1,0 +1,56 @@
+image: python:3.7-alpine
+
+variables:
+  TEST_REQUIREMENTS_LOCK: "requirements-dev.lock"
+
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/pip-cache"
+  PIP_CACHE_KEY: "$CI_PROJECT_ID"
+
+stages:
+  - test
+  - sonar
+  - build
+  - deploy
+
+.test: &test
+  stage: test
+  before_script:
+    - apk add graphviz
+    - infinity config build-info
+    - python --version
+    - pip install -U -r $TEST_REQUIREMENTS_LOCK
+    - export PYTHONPATH=$(pwd):$PYTHONPATH
+    - python setup.py develop
+  script:
+    - dante check
+    - flake8
+    - pytest -v --cov-config setup.cfg
+  artifacts:
+    paths:
+      - coverage_report/*
+  cache:
+    paths:
+      - $PIP_CACHE_DIR
+    key: $PIP_CACHE_KEY
+
+# Test with python 3.5
+test:3.5:
+  <<: *test
+  image: python:3.5-alpine
+
+# Test with python 3.6
+test:3.6:
+  <<: *test
+  image: python:3.6-alpine
+
+# Test with python 3.7
+test:3.7:
+  <<: *test
+  image: python:3.7-alpine
+
+# Runs static analysis with SonarQube
+sonar:
+  stage: sonar
+  image: emeraldsquad/sonar-scanner:1.0.0
+  script: infinity sonar scanner
+  allow_failure: true

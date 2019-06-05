@@ -1,10 +1,21 @@
-.idea/
 .DS_Store
-.cache
-build/
-dante.egg-info/
+
+*.iml
+.idea
+
 dist/
+build/
+
+*.pyc
 __pycache__
+*.egg-info/
 
 .tox
+.cache
 .coverage
+.coverage.*
+.pytest_cache
+coverage_report/
+
+.python-version
+dante-graph*

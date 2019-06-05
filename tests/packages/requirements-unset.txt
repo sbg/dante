@@ -1,0 +1,3 @@
+package1==1.0.0
+package2
+package3

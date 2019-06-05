@@ -1,2 +1,0 @@
-pip<10
-pipdeptree>=0.10.1
