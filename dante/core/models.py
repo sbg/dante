@@ -640,14 +640,13 @@ class Requirement(Dependency):
 
     def conflicting(self, allow_named_versions=False,
                     named_version_patterns=None):
-        """Find requirements with versions conflicting with calling
-        requirement.
+        """Find if requirement conflicts with other requirements or packages.
 
         Named versions will not be detected as conflicts if enabled.
 
         :param allow_named_versions: Whether named versions are allowed
         :param named_version_patterns: Patterns for matching named versions
-        :return:
+        :return: Whether there is a conflict
         """
         allow_named_versions = (
             allow_named_versions or Config.allow_named_versions or False

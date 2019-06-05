@@ -235,8 +235,7 @@ def required_version_mismatch(requirements=None, locked=None):
     return [
         (requirement, str(lock.specified_version))
         for requirement in requirements for lock in locked
-        if requirement.key == lock.key and
-        requirement.specified_version != lock.specified_version
+        if requirement.key == lock.key and requirement.conflicting()
     ]
 
 
