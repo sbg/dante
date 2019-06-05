@@ -1,5 +1,9 @@
 # Dante
 
+[![PyPI version](https://badge.fury.io/py/dante.svg)](https://badge.fury.io/py/dante)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/sbg/dante/blob/master/LICENSE)
+[![Downloads](https://pepy.tech/badge/dante)](https://pepy.tech/project/dante)
+
 Dante is a dependency management and validation tool for python projects.
 
 ## Purpose
