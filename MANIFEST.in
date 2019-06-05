@@ -1,0 +1,18 @@
+include *.lock
+include *.md
+include *.properties
+include *.txt
+include *.yml
+include LICENSE
+include dante/vendor/appdirs/LICENSE
+include dante/vendor/colorama/LICENSE
+include dante/vendor/graphviz/LICENSE
+include dante/vendor/packaging/LICENSE
+include dante/vendor/packaging/LICENSE.APACHE
+include dante/vendor/packaging/LICENSE.BSD
+include dante/vendor/pkg_resources/LICENSE
+include dante/vendor/pyparsing/LICENSE
+include dante/vendor/six/LICENSE
+recursive-include tests *.lock
+recursive-include tests *.py
+recursive-include tests *.txt
