@@ -259,19 +259,21 @@ def unnecessary_packages(packages=None, requirements=None, locked=None):
     ]))
 
 
-def unnecessary_locks(requirements=None, locked=None):
+def unnecessary_locks(requirements=None, locked=None, ignore_list=None):
     """Return locked requirements that are not required by requirements files
     :param requirements: Collection of requirements
     :param locked: Collection of locked requirements
+    :param ignore_list: List of package keys to ignore
     :return: All packages that do not need to be locked
     """
     requirements = requirements or RequirementCollection()
     locked = locked or RequirementCollection()
+    ignore_list = ignore_list or Config.ignore_list
 
     return RequirementCollection(sorted([
         lock for lock in locked
         if lock.key not in requirements.flatten().keys() and
-        lock.key not in Config.ignore_list
+        lock.key not in ignore_list
     ]))
 
 
