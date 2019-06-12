@@ -20,7 +20,7 @@ class Config:
     DEFAULT_IGNORE_LIST = [
         'dante', 'pip', 'setuptools', 'wheel',
     ]
-    DEFAULT_ALLOW_NAMED_VERSIONS = False
+    DEFAULT_ALLOW_NAMED_VERSIONS = 'false'
     DEFAULT_NAMED_VERSION_PATTERNS = []
 
     DEFAULT_REQUIREMENTS_FILE_PATH = 'requirements.txt'
@@ -33,7 +33,7 @@ class Config:
     GRAPH_DEFAULT_FILENAME = None
     GRAPH_DEFAULT_FORMAT = 'pdf'
     GRAPH_DEFAULT_ENGINE = 'dot'
-    GRAPH_DEFAULT_STRICT = True
+    GRAPH_DEFAULT_STRICT = 'true'
 
     GRAPH_DEFAULT_ATTRIBUTES = {}
     GRAPH_DEFAULT_NODE_ATTRIBUTES = {
@@ -150,8 +150,11 @@ class Config:
             cls.graph_engine = cls.get_option(
                 parser, cls.SECTION, 'graph_engine', cls.graph_engine
             )
-            cls.graph_strict = cls.get_option(
+            graph_strict = cls.get_option(
                 parser, cls.SECTION, 'graph_strict', cls.graph_strict
+            )
+            cls.graph_strict = (
+                graph_strict.lower() == 'true'
             )
 
         if parser.has_section(cls.GRAPH_ATTRIBUTE_SECTION):
