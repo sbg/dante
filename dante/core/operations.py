@@ -270,7 +270,8 @@ def unnecessary_locks(requirements=None, locked=None):
 
     return RequirementCollection(sorted([
         lock for lock in locked
-        if lock.key not in requirements.flatten().keys()
+        if lock.key not in requirements.flatten().keys() and
+        lock.key not in Config.ignore_list
     ]))
 
 
