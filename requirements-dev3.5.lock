@@ -12,6 +12,7 @@ mccabe==0.6.1
 mock==3.0.5
 more-itertools==7.0.0
 path.py==12.0.1
+pathlib2==2.3.3
 pluggy==0.12.0
 py==1.8.0
 pycodestyle==2.5.0

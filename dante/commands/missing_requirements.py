@@ -15,12 +15,11 @@ def missing_requirements_command(args, packages=None, exit_on_failure=True):
     :param exit_on_failure: Enable/disable exiting application on failure
     :return: None
     """
-    list_all = args.all or False
     requirements_files = (
-        args.requirements or Config.requirements_files if not list_all else []
+        args.requirements or Config.requirements_files or []
     )
     ignore_list = (
-        args.ignore or Config.ignore_list if not list_all else []
+        args.ignore or Config.ignore_list or []
     )
 
     printer = Printer()
@@ -37,13 +36,17 @@ def missing_requirements_command(args, packages=None, exit_on_failure=True):
         )
 
     packages = (
-        packages or dependency_list(list_all=list_all, ignore_list=ignore_list)
+        packages or dependency_list(ignore_list=ignore_list)
     )
 
     missing = [
         (package, required_by)
         for package, required_by
-        in missing_requirements(packages=packages, requirements=requirements)
+        in missing_requirements(
+            packages=packages,
+            requirements=requirements,
+            ignore_list=ignore_list
+        )
     ]
 
     headers = [

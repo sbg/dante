@@ -23,16 +23,15 @@ def validate_command(args, packages=None, exit_on_failure=True):
     :param exit_on_failure: Enable/disable exiting application on failure
     :return: None
     """
-    list_all = args.all or False
     strict = args.strict or False
     ignore_list = (
-        args.ignore or Config.ignore_list if not list_all else []
+        args.ignore or Config.ignore_list or []
     )
     requirements_files = (
-        args.requirements or Config.requirements_files if not list_all else []
+        args.requirements or Config.requirements_files or []
     )
     lock_files = (
-        args.lock or Config.lock_files if not list_all else []
+        args.lock or Config.lock_files or []
     )
 
     printer = Printer()
@@ -58,7 +57,7 @@ def validate_command(args, packages=None, exit_on_failure=True):
 
     checks_ok = []
     packages = (
-        packages or dependency_list(list_all=list_all, ignore_list=ignore_list)
+        packages or dependency_list(ignore_list=ignore_list)
     )
 
     checks_ok.append(check_unlocked_requirements(
@@ -91,6 +90,7 @@ def validate_command(args, packages=None, exit_on_failure=True):
         checks_ok.append(check_unnecessary_locks(
             requirements=requirements,
             locked=locked,
+            ignore_list=ignore_list,
             printer=printer,
         ))
 
@@ -308,7 +308,7 @@ def check_unnecessary_packages(
     return True
 
 
-def check_unnecessary_locks(requirements, locked, printer=None):
+def check_unnecessary_locks(requirements, locked, ignore_list, printer=None):
     """Run validation that checks if there are unnecessary locked requirements
         that are not required by anything
     :param requirements: Collection of requirements
@@ -318,7 +318,9 @@ def check_unnecessary_locks(requirements, locked, printer=None):
     """
     printer = printer or Printer()
     lock_not_required = unnecessary_locks(
-        requirements=requirements, locked=locked
+        requirements=requirements,
+        locked=locked,
+        ignore_list=ignore_list,
     )
 
     headers = [

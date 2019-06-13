@@ -17,9 +17,8 @@ def graph_command(args, packages=None, exit_on_failure=True):
     :param exit_on_failure: Enable/disable exiting application on failure
     :return: None
     """
-    list_all = args.all or False
     ignore_list = (
-        args.ignore or Config.ignore_list if not list_all else []
+        args.ignore or Config.ignore_list or []
     )
 
     name = args.name or Config.graph_name
@@ -35,7 +34,7 @@ def graph_command(args, packages=None, exit_on_failure=True):
 
     printer = Printer()
     packages = (
-        packages or dependency_list(list_all=list_all, ignore_list=ignore_list)
+        packages or dependency_list(ignore_list=ignore_list)
     )
 
     graph = get_graph(

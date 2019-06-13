@@ -414,24 +414,19 @@ class PackageCollection(list):
         ], key=lambda p: p.key))
 
     @staticmethod
-    def installed_packages(packages=None, list_all=False, ignore_list=None):
+    def installed_packages(packages=None, ignore_list=None):
         """Retrieve installed packages
         :param packages: Source packages
-        :param list_all: Whether to list all packages
         :param ignore_list: List of ignored package keys
         :return: PackageCollection object
         """
         ignore_list = ignore_list or []
         packages = packages or pkg_resources.working_set
 
-        default_ignore_list = Config.ignore_list
-
-        if not list_all:
-            ignore_list.extend(default_ignore_list)
-            packages = [
-                package for package in packages
-                if package.key not in ignore_list
-            ]
+        packages = [
+            package for package in packages
+            if package.key not in ignore_list
+        ]
 
         return PackageCollection.from_distributions(
             packages=packages, ignore_list=ignore_list
@@ -723,7 +718,8 @@ class RequirementCollection(list):
             if requirement.key not in result.keys():
                 result.append(requirement)
             new = [
-                item for item in requirement.requirements if item not in result
+                item for item in requirement.requirements
+                if item not in result
             ]
             if new:
                 self.flatten(new, result)

@@ -9,15 +9,15 @@ from dante.core.models import (
 from dante.core.graph import create_dependency_graph, render_dependency_graph
 
 
-def dependency_list(list_all=False, ignore_list=None, requirements=None):
+def dependency_list(ignore_list=None, requirements=None):
     """Returns all installed packages
-    :param list_all: Enable/disable filtering packages with ignore_list
     :param ignore_list: List of package keys to ignore
     :param requirements: Collection of requirements
     :return: List of packages
     """
+    ignore_list = ignore_list or Config.ignore_list
+
     installed_packages = PackageCollection.installed_packages(
-        list_all=list_all,
         ignore_list=ignore_list
     )
 
@@ -79,19 +79,21 @@ def cyclic_dependencies(packages=None):
     return packages.cyclic_dependencies
 
 
-def missing_requirements(packages=None, requirements=None):
+def missing_requirements(packages=None, requirements=None, ignore_list=None):
     """Returns all requirements that are not installed
     :param packages: Collection of packages
     :param requirements: Collection of requirements
+    :param ignore_list: List of package keys to ignore
     :return: All requirements that are not found in packages
     """
     packages = packages or PackageCollection()
     requirements = requirements or RequirementCollection()
+    ignore_list = ignore_list or []
 
     return [
         (requirement, required_by(requirement, packages))
         for requirement in requirements.flatten()
-        if requirement.key not in packages.keys()
+        if requirement.key not in ignore_list + packages.keys()
     ]
 
 
@@ -171,14 +173,16 @@ def dependency_tree(packages=None, requirements=None):
     return tree
 
 
-def locked_requirements(packages=None, requirements=None):
+def locked_requirements(packages=None, requirements=None, ignore_list=None):
     """Returns all requirements locked to the required versions
     :param packages: Collection of packages
     :param requirements: Collection of requirements
+    :param ignore_list: List of package keys to ignore
     :return: All requirements locked to their installed versions
     """
     packages = packages or PackageCollection()
     requirements = requirements or RequirementCollection()
+    ignore_list = ignore_list or []
 
     if not requirements:
         return RequirementCollection(sorted([
@@ -268,12 +272,12 @@ def unnecessary_locks(requirements=None, locked=None, ignore_list=None):
     """
     requirements = requirements or RequirementCollection()
     locked = locked or RequirementCollection()
-    ignore_list = ignore_list or Config.ignore_list
+    ignore_list = ignore_list or []
 
     return RequirementCollection(sorted([
         lock for lock in locked
-        if lock.key not in requirements.flatten().keys() and
-        lock.key not in ignore_list
+        if lock.key not in requirements.flatten().keys()
+        and lock.key not in ignore_list
     ]))
 
 

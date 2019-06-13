@@ -14,10 +14,7 @@ def cli():
         '-v', '--version', action='version', version=__version__
     )
     parser.add_argument(
-        '-a', '--all', action='store_true', help='Show all packages'
-    )
-    parser.add_argument(
-        '-i', '--ignore', action='append', help='Ignore dependency'
+        '-i', '--ignore', action='append', help='Ignore package'
     )
 
     subparsers = parser.add_subparsers()

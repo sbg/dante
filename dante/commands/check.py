@@ -10,11 +10,10 @@ def check_all(args):
     :param args: Command arguments
     :return: None
     """
-    list_all = args.all or False
     ignore_list = args.ignore or []
     checks_ok = []
 
-    packages = dependency_list(list_all=list_all, ignore_list=ignore_list)
+    packages = dependency_list(ignore_list=ignore_list)
 
     if 'validate' in Config.checks:
         checks_ok.append(dante.commands.validate_command(

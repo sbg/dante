@@ -14,12 +14,11 @@ def lock_command(args, packages=None, exit_on_failure=True):
     :param exit_on_failure: Enable/disable exiting application on failure
     :return: None
     """
-    list_all = args.all or False
     requirements_files = (
-        args.requirements or Config.requirements_files if not list_all else []
+        args.requirements or Config.requirements_files or []
     )
     ignore_list = (
-        args.ignore or Config.ignore_list if not list_all else []
+        args.ignore or Config.ignore_list or []
     )
     save_lock = args.save or False
     lock_filepath = args.file or Config.lock_file_path
@@ -32,15 +31,20 @@ def lock_command(args, packages=None, exit_on_failure=True):
     ):
         return False
 
-    packages = (
-        packages or dependency_list(list_all=list_all, ignore_list=ignore_list)
-    )
-
     requirements = RequirementCollection()
     for requirements_file in requirements_files:
         requirements.extend(
             RequirementCollection.from_file(filepath=requirements_file)
         )
+
+    lock_ignore_list = [
+        key for key in ignore_list if key not in requirements.keys()
+    ]
+
+    packages = (
+        packages or
+        dependency_list(ignore_list=lock_ignore_list)
+    )
 
     locked = locked_requirements(
         packages=packages, requirements=requirements
