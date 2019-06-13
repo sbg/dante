@@ -20,7 +20,7 @@ stages:
     - export PYTHONPATH=$(pwd):$PYTHONPATH
     - python setup.py develop
   script:
-    - dante check
+    - dante check -l $LOCK_FILE
     - flake8
     - pytest -v --cov-config setup.cfg
   artifacts:
