@@ -6,6 +6,9 @@ matrix:
     - python: 3.6
     - python: 3.7
 
+before_install:
+  - sudo apt-get install graphviz
+
 install:
   - if [[ $TRAVIS_PYTHON_VERSION == '3.5' ]]; then pip install -r requirements-dev3.5.lock; else pip install -r requirements-dev.lock; fi
 
@@ -13,3 +16,17 @@ script:
   - flake8
   - dante check
   - py.test -v --cov-config setup.cfg
+
+deploy:
+  script:
+    - echo "__version__ = '$TRAVIS_TAG'" > dante/version.py
+  provider: pypi
+  user: sbg
+  password:
+    secure: mZxj6cDbb+0enyG+FrDTu8sF45oWamrcQZDxP3zHHUHXoS+azyVZnD0atYq8pU7VLpy2pTb/XI/sFZWEr/Zh88zvMpLeqqREIxHME8/lkhyrmFMMqMP65PSJdS1Xqob8AESRLTpF8dB7MTi142s9uzzKIy+Cw/zV+dlCte3qsWBzFQjNkvK+ITF9/DWePXE7gLsqW1G98KT2zIw2qPGI1ky4vbOJxidmnI2sPPASAyG5K0s0ee+puuTqXqae92EtnezRY+lpQn3+z5bHbCxkRPrJGjDnNCcLnf4T7lUSF7P/rR52++WyA5zdE5G8PHZYTDS9M2fPqLz3TaDwkVmeyDvWfxmTvyGb0TflX7peFzo1vkPaYlTQ1o7SjnVelIEOCjruDZpX9XczTZk+ZJuRSqLtFqnPprGf28NiWWoGHQlm90lB/Tv+jFLQai2wgkZvPWtFHagKRKyNKKfOi7Ozz/ZG7Ds0csxcanz52xTVa5ITGc2RHvoCcRc1dhwTP0GaPkWWks0CVVL//YoIpzSEB2ygfIRzElb5CV/crMds76LbuYR5nJGtOupVrl1j/Mr1O614AJbKJw9QepwRZxAPeuTv3VGeS8iLrkX8PyGkKwXYQZRHa9zcR0yidJ70K/2Gzi5lh3fwbbwBdRPEcwIB8zh/yDfDpQGonOHCLqilw7o=
+  on:
+    tags: true
+    branch: master
+    distributions: sdist bdist_wheel
+    repo: sbg/dante
+skip_existing: true
