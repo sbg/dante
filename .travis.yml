@@ -14,7 +14,7 @@ install:
 
 script:
   - flake8
-  - dante check
+  - python dante check
   - py.test -v --cov-config setup.cfg
 
 deploy:
