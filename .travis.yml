@@ -15,7 +15,7 @@ install:
 
 script:
   - flake8
-  - dante check
+  - if [[ $TRAVIS_PYTHON_VERSION < 3.6 ]]; then dante check -l requirements-dev3.5.lock; else dante check; fi
   - py.test -v --cov-config setup.cfg
 
 deploy:
