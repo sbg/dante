@@ -1,0 +1,15 @@
+language: python
+
+matrix:
+  include:
+    - python: 3.5
+    - python: 3.6
+    - python: 3.7
+
+install:
+  - if [[ $TRAVIS_PYTHON_VERSION == '3.5' ]]; then pip install -r requirements-dev3.5.lock; else pip install -r requirements-dev.lock; fi
+
+script:
+  - flake8
+  - dante check
+  - py.test -v --cov-config setup.cfg
