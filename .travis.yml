@@ -11,7 +11,7 @@ before_install:
   - python setup.py develop
 
 install:
-  - if [[ $TRAVIS_PYTHON_VERSION == '3.5' ]]; then pip install -r requirements-dev3.5.lock; else pip install -r requirements-dev.lock; fi
+  - if [[ $TRAVIS_PYTHON_VERSION < 3.6 ]]; then pip install -r requirements-dev3.5.lock; else pip install -r requirements-dev.lock; fi
 
 script:
   - flake8
