@@ -1,6 +1,10 @@
 Release History
 ===============
 
+## 2.0.6
+**Docs**
+- Updated the readme
+
 ## 2.0.5
 **Improvements**
 - Removed list_all parameter since it was not useful (pip list does the job already)
