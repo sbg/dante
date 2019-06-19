@@ -6,13 +6,15 @@ README_FILE = 'README.md'
 DESCRIPTION = LONG_DESCRIPTION = 'Python dependency management utility'
 if os.path.isfile(README_FILE):
     with open(README_FILE, 'r', encoding='utf-8') as readme_file:
-        long_description = readme_file.read()
+        LONG_DESCRIPTION = readme_file.read()
+
+VERSION = os.getenv('TRAVIS_TAG', os.getenv('VERSION', '0.0.1+local-build'))
 
 setup(
     name='dante',
-    version=os.getenv('VERSION', '0.0.1+local-build'),
+    version=VERSION,
     description=DESCRIPTION,
-    long_description=long_description,
+    long_description=LONG_DESCRIPTION,
     long_description_content_type='text/markdown',
     platforms=['Windows', 'POSIX', 'MacOs'],
     maintainer='Seven Bridges Genomics Inc.',
