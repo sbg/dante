@@ -1,5 +1,6 @@
 # Dante
 
+[![Travis](https://api.travis-ci.com/sbg/dante.svg)](https://travis-ci.com/sbg/dante)
 [![PyPI version](https://badge.fury.io/py/dante.svg)](https://badge.fury.io/py/dante)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/sbg/dante/blob/master/LICENSE)
 [![Downloads](https://pepy.tech/badge/dante)](https://pepy.tech/project/dante)
