@@ -20,9 +20,9 @@ script:
   - if [[ $TRAVIS_PYTHON_VERSION < 3.6 ]]; then dante check -l requirements-dev3.5.lock; else dante check; fi
   - py.test -v --cov-config setup.cfg
 
+before_deploy: echo "__version__ = '$TRAVIS_TAG'" > dante/version.py
+
 deploy:
-  script:
-    - echo "__version__ = '$TRAVIS_TAG'" > dante/version.py
   provider: pypi
   user: sbg
   password:
