@@ -32,4 +32,5 @@ deploy:
     branch: master
     distributions: sdist bdist_wheel
     repo: sbg/dante
+  skip_cleanup: true
   skip_existing: true
