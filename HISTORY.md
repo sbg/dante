@@ -1,6 +1,11 @@
 Release History
 ===============
 
+## 2.0.7
+**Bugfixes**
+- Fixed version detection when installing
+- Fixed requirements file printing in config command
+
 ## 2.0.6
 **Docs**
 - Updated the readme
