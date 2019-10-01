@@ -221,7 +221,7 @@ class Config:
                 ('allow_named_versions', cls.allow_named_versions),
                 ('named_version_patterns', cls.named_version_patterns),
                 ('lock_file_path', cls.lock_file_path),
-                ('requirements_files', cls.lock_files),
+                ('requirements_files', cls.requirements_files),
                 ('lock_files', cls.lock_files),
                 ('graph_name', cls.graph_name),
                 ('graph_filename', cls.graph_filename),
