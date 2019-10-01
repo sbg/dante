@@ -1,6 +1,6 @@
 import os
 from setuptools import setup, find_packages
-
+from dante.version import __version__
 
 README_FILE = 'README.md'
 DESCRIPTION = LONG_DESCRIPTION = 'Python dependency management utility'
@@ -8,11 +8,9 @@ if os.path.isfile(README_FILE):
     with open(README_FILE, 'r', encoding='utf-8') as readme_file:
         LONG_DESCRIPTION = readme_file.read()
 
-VERSION = os.getenv('TRAVIS_TAG', os.getenv('VERSION', '0.0.1+local-build'))
-
 setup(
     name='dante',
-    version=VERSION,
+    version=__version__,
     description=DESCRIPTION,
     long_description=LONG_DESCRIPTION,
     long_description_content_type='text/markdown',
