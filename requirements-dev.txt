@@ -4,5 +4,5 @@ pytest            ==4.5.0
 pytest-cov        ==2.7.1
 pytest-mock       ==1.10.4
 pytest-virtualenv ==1.7.0
-virtualenv        ==16.6.0
+virtualenv        ==20.36.1
 pytest-xdist      ==1.28.0
