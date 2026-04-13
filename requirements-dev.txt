@@ -1,6 +1,6 @@
 faker             ==1.0.7
 flake8            ==3.7.7
-pytest            ==4.5.0
+pytest            ==9.0.3
 pytest-cov        ==2.7.1
 pytest-mock       ==1.10.4
 pytest-virtualenv ==1.7.0
